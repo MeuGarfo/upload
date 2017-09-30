@@ -17,9 +17,9 @@ class Upload{
                 if (in_array($file['ext'], $exts)) {
                     $isImage = getimagesize($_FILES[$name]["tmp_name"]);
                     if($isImage){
-                        $file['isImage']=true;
+                        $file['is_image']=true;
                     }else{
-                        $file['isImage']=false;
+                        $file['is_image']=false;
                     }
                 }else{
                     $error[]='invalid_extension';
