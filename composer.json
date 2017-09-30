@@ -3,7 +3,7 @@
     "description": "Sistema básico de upload",
     "minimum-stability": "dev",
     "license": "MIT",
-    "autload": {
+    "autoload": {
         "psr-4": {
             "Basic\\": "/src"
         }
