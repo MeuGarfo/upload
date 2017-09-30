@@ -1,6 +1,6 @@
 {
     "name": "basic/upload",
-    "description": "Sistema b\u00e1sico de upload",
+    "description": "Sistema básico de upload",
     "minimum-stability": "dev",
     "license": "MIT",
     "autload": {

@@ -3,13 +3,13 @@ namespace Basic;
 
 class Upload{
     function upload($name,$exts){
-        $maxSize=max_upload_size();
+        $maxSize=$this->max_upload_size();
         $error=false;
         switch(@$_FILES[$name]["error"]){
             case 0:
             //0. upload bem sucedido
             $file['size']=@$_FILES[$name]['size'];
-            if($file['size']<max_upload_size()){
+            if($file['size']<$maxSize){
                 $file['name']=@$_FILES[$name]['name'];
                 $file['ext']=@pathinfo($_FILES[$name]['name'],PATHINFO_EXTENSION);
                 $file['ext']=strtolower($file['ext']);
@@ -66,6 +66,6 @@ class Upload{
     }
     function max_upload_size()
     {
-        return min(convert_php_size_to_bytes(ini_get('post_max_size')), convert_php_size_to_bytes(ini_get('upload_max_filesize')));
+        return min($this->convert_php_size_to_bytes(ini_get('post_max_size')), $this->convert_php_size_to_bytes(ini_get('upload_max_filesize')));
     }
 }
