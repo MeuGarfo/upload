@@ -1,0 +1,11 @@
+{
+    "name": "basic/upload",
+    "description": "Sistema b\u00e1sico de upload",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "autload": {
+        "psr-4": {
+            "Basic\\": "/src"
+        }
+    }
+}
