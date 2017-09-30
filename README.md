@@ -10,11 +10,11 @@ $exts=[
 'gif'
 ];
 $file=$Upload->upload($name,$exts);
-if($file){
-    print 'arquivo enviado com sucesso';
-}else{
+if(isset($file['error'])){
     print '<pre>';
-    var_dump($file);
+    print_r($file['error']);
+}else{
+    print 'arquivo enviado com sucesso';
 }
 ```
 
