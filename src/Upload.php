@@ -39,7 +39,9 @@ class Upload{
             $error[]='unknown_error';
             break;
         }
-        $file['error']=$error;
+        if($error){
+            $file['error']=$error;
+        }
         return $file;
     }
     function convert_php_size_to_bytes($sSize)
