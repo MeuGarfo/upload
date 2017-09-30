@@ -2,14 +2,17 @@
 :arrow_up: Sistema básico de upload
 
 ## como usar
+### composer
+    composer require basic/upload
+
 ### front-end
 ```
-<form action="/upload" enctype="multipart/form-data" method="post">
+<form action="upload.php" enctype="multipart/form-data" method="post">
     <input name="file" type="file">
     <button type="submit">Enviar</button>
 </form>
 ```
-### back-end
+### back-end (upload.php)
 ```
 <?php
 require 'vendor/autoload.php';
