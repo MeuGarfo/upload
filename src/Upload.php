@@ -24,6 +24,7 @@ class Upload
 
                     if (in_array($file['ext'], $exts)) {
                         $isImage = getimagesize($_FILES[$name]['tmp_name']);
+                        
                         if ($isImage) {
                             $file['is_image'] = true;
                         } else {
