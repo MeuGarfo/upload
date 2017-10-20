@@ -3,7 +3,69 @@ namespace Basic;
 
 class Upload
 {
-    public function upload($name, $exts)
+    /**
+    * Converte o tamanho máximo do upload para bytes
+    * @param  string  $sSize String com o tamanho
+    * @return integer        Valor em bytes
+    */
+    private function convertPhpSizeToBytes(string $sSize):integer
+    {
+        if (is_numeric($sSize)) {
+            return $sSize;
+        }
+        $sSuffix = substr($sSize, -1);
+        $iValue = substr($sSize, 0, -1);
+        switch (strtoupper($sSuffix)) {
+            case 'P':
+            $iValue *= 1024;
+            break;
+            case 'T':
+            $iValue *= 1024;
+            break;
+            case 'G':
+            $iValue *= 1024;
+            break;
+            case 'M':
+            $iValue *= 1024;
+            break;
+            case 'K':
+            $iValue *= 1024;
+            break;
+        }
+        return $iValue;
+    }
+    /**
+    * Retorna o tamanho máximo permitido para o arquivo enviado
+    * @return string Tamanho do arquivo
+    */
+    public function maxUploadSize():string
+    {
+        return min(
+            $this->convertPhpSizeToBytes(ini_get('post_max_size')),
+            $this->convertPhpSizeToBytes(ini_get('upload_max_filesize'))
+        );
+    }
+    /**
+    * Move o arquivo enviado para o destino
+    * @param  string $filename     Nome do arquivo temporário
+    * @param  string $destination  Nome do arquivo de destino
+    * @return bool                Retorna true ou false
+    */
+    public function move(string $filename,string $destination):bool
+    {
+        if(move_uploaded_file(string $filename , string $destination)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    /**
+    * Enviar arquivo
+    * @param  string $name Nome do campo $_FILES
+    * @param  array  $exts Lista de extensões permitidas
+    * @return array        Array com dados do upload
+    */
+    public function upload(string $name, array $exts):array
     {
         $maxSize = $this->maxUploadSize();
         $error = false;
@@ -41,40 +103,5 @@ class Upload
             $file['error'] = $error;
         }
         return $file;
-    }
-
-    public function convertPhpSizeToBytes($sSize)
-    {
-        if (is_numeric($sSize)) {
-            return $sSize;
-        }
-        $sSuffix = substr($sSize, -1);
-        $iValue = substr($sSize, 0, -1);
-        switch (strtoupper($sSuffix)) {
-            case 'P':
-            $iValue *= 1024;
-            break;
-            case 'T':
-            $iValue *= 1024;
-            break;
-            case 'G':
-            $iValue *= 1024;
-            break;
-            case 'M':
-            $iValue *= 1024;
-            break;
-            case 'K':
-            $iValue *= 1024;
-            break;
-        }
-        return $iValue;
-    }
-
-    public function maxUploadSize()
-    {
-        return min(
-            $this->convertPhpSizeToBytes(ini_get('post_max_size')),
-            $this->convertPhpSizeToBytes(ini_get('upload_max_filesize'))
-        );
     }
 }
