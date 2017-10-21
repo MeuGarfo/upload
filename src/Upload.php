@@ -8,7 +8,7 @@ class Upload
     * @param  string  $sSize String com o tamanho
     * @return integer        Valor em bytes
     */
-    private function convertPhpSizeToBytes(string $sSize):integer
+    private function convertPhpSizeToBytes(string $sSize)
     {
         if (is_numeric($sSize)) {
             return $sSize;
@@ -38,7 +38,7 @@ class Upload
     * Retorna o tamanho máximo permitido para o arquivo enviado
     * @return string Tamanho do arquivo
     */
-    public function maxUploadSize():string
+    public function maxUploadSize()
     {
         return min(
             $this->convertPhpSizeToBytes(ini_get('post_max_size')),
@@ -51,11 +51,11 @@ class Upload
     * @param  string $destination  Nome do arquivo de destino
     * @return bool                Retorna true ou false
     */
-    public function move(string $filename,string $destination):bool
+    public function move(string $filename, string $destination)
     {
-        if(move_uploaded_file(string $filename , string $destination)){
+        if (move_uploaded_file($filename, $destination)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -65,7 +65,7 @@ class Upload
     * @param  array  $exts Lista de extensões permitidas
     * @return array        Array com dados do upload
     */
-    public function upload(string $name, array $exts):array
+    public function upload(string $name, array $exts)
     {
         $maxSize = $this->maxUploadSize();
         $error = false;
