@@ -4,46 +4,31 @@ namespace Basic;
 class Upload
 {
     /**
-    * Converte o tamanho máximo do upload para bytes
-    * @param  string  $sSize String com o tamanho
-    * @return integer        Valor em bytes
-    */
-    private function convertPhpSizeToBytes(string $sSize)
-    {
-        if (is_numeric($sSize)) {
-            return $sSize;
-        }
-        $sSuffix = substr($sSize, -1);
-        $iValue = substr($sSize, 0, -1);
-        switch (strtoupper($sSuffix)) {
-            case 'P':
-            $iValue *= 1024;
-            break;
-            case 'T':
-            $iValue *= 1024;
-            break;
-            case 'G':
-            $iValue *= 1024;
-            break;
-            case 'M':
-            $iValue *= 1024;
-            break;
-            case 'K':
-            $iValue *= 1024;
-            break;
-        }
-        return $iValue;
-    }
-    /**
     * Retorna o tamanho máximo permitido para o arquivo enviado
     * @return string Tamanho do arquivo
     */
     public function maxUploadSize()
     {
-        return min(
-            $this->convertPhpSizeToBytes(ini_get('post_max_size')),
-            $this->convertPhpSizeToBytes(ini_get('upload_max_filesize'))
-        );
+        $value=ini_get('upload_max_filesize');
+        if (is_numeric($value)) {
+            return $value;
+        } else {
+            $value_length = strlen($value);
+            $qty = substr($value, 0, $value_length - 1);
+            $unit = strtolower(substr($value, $value_length - 1));
+            switch ($unit) {
+                case 'k':
+                $qty *= 1024;
+                break;
+                case 'm':
+                $qty *= 1048576;
+                break;
+                case 'g':
+                $qty *= 1073741824;
+                break;
+            }
+            return $qty;
+        }
     }
     /**
     * Move o arquivo enviado para o destino
