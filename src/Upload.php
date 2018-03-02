@@ -53,7 +53,7 @@ class Upload
     public function upload(string $name, array $exts)
     {
         $maxSize = $this->maxUploadSize();
-        $error = false;
+        $errors = false;
         switch (@$_FILES[$name]['error']) {
             case 0:
             $file['size'] = @$_FILES[$name]['size'];
@@ -70,22 +70,22 @@ class Upload
                         $file['is_image'] = false;
                     }
                 } else {
-                    $error[] = 'invalid_extension';
+                    $errors[] = 'invalid_extension';
                 }
             } else {
-                $error[] = 'invalid_size';
+                $errors[] = 'invalid_size';
             }
             break;
             case 1:
             case 2:
-            $error[] = 'invalid_size';
+            $errors[] = 'invalid_size';
             break;
             default:
-            $error[] = 'unknown_error';
+            $errors[] = 'unknown_error';
             break;
         }
-        if ($error) {
-            $file['error'] = $error;
+        if ($errors) {
+            $file['errors'] = $errors;
         }
         return $file;
     }
