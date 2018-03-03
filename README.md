@@ -34,11 +34,11 @@ if(isset($file['error'])){
 
 ## campos retornados
 ```
-name    nome original do arquivo (string)
-ext     extensão do arquivo (string)
-image   retorna se é imagem (bool)
-size    retorna o tamanho do arquivo e bytes (int)
-temp    caminho temporário do arquivo (string)
+name        nome original do arquivo (string)
+ext         extensão do arquivo (string)
+is_image    retorna se é imagem (bool)
+size        retorna o tamanho do arquivo e bytes (int)
+temp        caminho temporário do arquivo (string)
 
 ```
 
