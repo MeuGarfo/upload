@@ -24,15 +24,15 @@ $exts=[
 'gif'
 ];
 $file=$Upload->upload('file',$exts);
-if(isset($file['error'])){
+if(isset($file['errors'])){
     print '<pre>';
-    print_r($file['error']);
+    print_r($file['errors']);
 }else{
     print 'arquivo enviado com sucesso';
 }
 ```
 
-## campos retornados
+## campos retornados ($file['errors'])
 ```
 name        nome original do arquivo (string)
 ext         extensão do arquivo (string)
