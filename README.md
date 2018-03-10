@@ -32,17 +32,18 @@ if(isset($file['errors'])){
 }
 ```
 
-## campos retornados ($file['errors'])
+## campos retornados ($file)
 ```
 name        nome original do arquivo (string)
 ext         extensão do arquivo (string)
 is_image    retorna se é imagem (bool)
 size        retorna o tamanho do arquivo e bytes (int)
 temp        caminho temporário do arquivo (string)
+errors      mensagens de erro
 
 ```
 
-## mensagens de erro
+## mensagens de erro ($file['errors'])
 ```
 invalid_extension
 invalid_size
